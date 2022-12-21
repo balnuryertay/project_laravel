@@ -13,19 +13,24 @@ class LoginController extends Controller
     }
     public function login(Request $request){
         if(Auth::check()){
-            return redirect()->intended('/posts');
+            return redirect()->intended('/home');
         }
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
         if(Auth::attempt($validated)){
-            return redirect()->intended('/posts');
+            if(Auth::user()->role->name == "admin")
+                return redirect()->intended('/adm/users');
+            else if(Auth::user()->role->name == "moderator")
+                return redirect()->intended('/adm/basket');
+            else
+                return redirect()->intended('/home');
         }
         return back()->withErrors('Incorrect email or password!!!');
     }
     public function logout(){
         Auth::logout();
-        return redirect()->route('foods.index');
+        return redirect()->route('home');
     }
 }

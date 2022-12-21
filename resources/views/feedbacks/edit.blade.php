@@ -30,12 +30,12 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="feedbackInput">Feedback:</label>
+                        <label for="feedbackInput">{{ __('messages.feedback') }}:</label>
                         <textarea class="form-control" id="feedbackInput" rows="3" name="text">{{$feedback->text}}</textarea>
                     </div>
 
                     <div class="form-group mt-3">
-                        <button class="btn btn-outline-success" type="submit">Update comment</button>
+                        <button class="btn btn-outline-success" type="submit">{{ __('messages.update') }}</button>
                     </div>
                 </form>
             </div>

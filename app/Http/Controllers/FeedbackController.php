@@ -25,7 +25,7 @@ class FeedbackController extends Controller
             'food_id'=>'required|numeric|exists:food,id'
         ]);
         Auth::user()->feedbacks()->create($validated);
-        return back()->with('message', 'Thanks for the feedback!');
+        return back()->with('message', __('messages.fadd'));
     }
 
     public function show(Feedback $feedback) {
@@ -42,12 +42,12 @@ class FeedbackController extends Controller
         ]);
 
         Auth::user()->feedbacks()->update($validated);
-        return redirect()->route('foods.show', $feedback->food_id)->with('message', 'Your beedback is updated!');
+        return redirect()->route('foods.show', $feedback->food_id)->with('message', __('messages.fupdate'));
     }
 
     public function destroy(Feedback $feedback) {
         $feedback->delete();
-        return back()->with('message', 'Feedback is deleted!');
+        return back()->with('message', __('messages.fdelete'));
     }
 }
 
